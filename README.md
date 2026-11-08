@@ -2,8 +2,8 @@
 
 # mathbridge
 
-A unified layer over NumPy / SciPy for the topics that Python leaves scattered:
-**functional analysis**, **Fourier series**, and **heat and wave PDEs** (more modules planned).
+A unified layer over NumPy / SciPy / SymPy for the topics that Python leaves scattered:
+**functional analysis**, **Fourier series**, **heat and wave PDEs**, and **space curves** (more modules planned).
 Every function returns a `Result` carrying the answer, the solution steps, and a plot.
 
 ```python
@@ -27,6 +27,7 @@ fourier.gibbs_overshoot(sq, np.pi, n_terms=50, explain=True)
 | `mathbridge.functional` | `inner_product`, `norm`, `distance`, `gram_schmidt`, `project`, `galerkin_matrix`, `integral_operator`, `spectrum`, `operator_norm`, `convergence_report` |
 | `mathbridge.fourier` | `coefficients`, `partial_sum`, `parseval`, `gibbs_overshoot` |
 | `mathbridge.pde` | `heat_separation`, `heat_fd`, `wave_separation`, `wave_fd` |
+| `mathbridge.geometry` | `curvature`, `torsion`, `frenet_frame` |
 
 ## Convergence reports
 
@@ -86,6 +87,41 @@ time for 0≤t≤T; separation solutions allow any t≥0. Spatial queries must l
 compatible with these boundary conditions. `explain=True` prints method steps;
 `plot=True` (or `result.plot()`) shows snapshots at four times.
 
+## Space curves
+
+Curvature, torsion, and Frenet frames accept a callable `r(t)` returning three
+real coordinates, or a SymPy matrix/list of three expressions with exactly one
+free parameter. Substitute numerical values for any other symbols first. SymPy
+curves use exact symbolic derivatives before numerical evaluation; callables use
+seven-point centered differences, with an optional step `h` (default ε^(1/7)).
+Callable curves must be smooth and defined within 3h of each evaluation point;
+numerical third derivatives for torsion are sensitive to the chosen step.
+
+```python
+import sympy as sp
+from mathbridge import geometry
+
+s = sp.Symbol("s", real=True)
+helix = sp.Matrix([2 * sp.cos(s), 2 * sp.sin(s), s])
+print(geometry.curvature(helix, [0, 1, 2]).value)  # [0.4, 0.4, 0.4]
+print(geometry.torsion(helix, 0).value)           # 0.2
+frame = geometry.frenet_frame(helix, 1, explain=True, plot=True)
+# Callable alternative:
+geometry.curvature(lambda t: [2*np.cos(t), 2*np.sin(t), t], 1)
+```
+
+Each `Result.value` is a NumPy array. Curvature and torsion have the shape of
+the supplied `t` (a 0-D array for a scalar); Frenet frames have shape
+`t.shape + (3,3)`, with rows **T, N, B** and T×N=B. Nonzero speed is required;
+torsion and the frame also require nonzero curvature. A circle of radius R has
+curvature 1/R and torsion 0. A helix (a cos t, a sin t, b t), a>0, has curvature
+a/(a²+b²) and torsion b/(a²+b²).
+
+All three functions support `explain=True` and `plot=True`. Plots draw the curve
+and unit T, N, B directions at the first evaluation point; `plot_interval=(a,b)`
+sets the displayed parameter interval (default t_first±1). A plot requires a
+defined Frenet frame, including when plotting a curvature result.
+
 ## Gallery
 
 Square wave Fourier partial sums with N=5 and N=50 show the Gibbs phenomenon.
@@ -113,7 +149,7 @@ python examples/make_figures.py
 
 - Functional: convergence estimates for Galerkin operator approximations
 - PDE: Laplace equation and additional boundary conditions
-- Differential geometry: curvature, Frenet frame, geodesics
+- Differential geometry: geodesics and surfaces
 - Numerical methods with the same calling style
 
 ## Install and test
