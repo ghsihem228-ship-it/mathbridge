@@ -24,8 +24,33 @@ fourier.gibbs_overshoot(sq, np.pi, n_terms=50, explain=True)
 
 | Module | Functions |
 |---|---|
-| `mathbridge.functional` | `inner_product`, `norm`, `distance`, `gram_schmidt`, `project`, `galerkin_matrix`, `integral_operator`, `spectrum`, `operator_norm` |
+| `mathbridge.functional` | `inner_product`, `norm`, `distance`, `gram_schmidt`, `project`, `galerkin_matrix`, `integral_operator`, `spectrum`, `operator_norm`, `convergence_report` |
 | `mathbridge.fourier` | `coefficients`, `partial_sum`, `parseval`, `gibbs_overshoot` |
+
+## Convergence reports
+
+Pass a factory `fn_seq(n)` returning the function f_n, the proposed limit, the
+interval, and increasing integer indices:
+
+```python
+report = functional.convergence_report(
+    lambda n: lambda x: x**n, lambda x: 0.0, (0, 1),
+    [1, 2, 4, 8, 16, 32, 64], explain=True, plot=True,
+)
+print(report.value["l2"])
+```
+
+The result contains three lists, ordered by n: `pointwise` holds five absolute
+errors per n at evenly spaced points including the endpoints; `sup` holds the
+maximum error on a 2001-point grid; `l2` holds the error norm from adaptive
+quadrature. The plot shows the maximum sampled pointwise error and the other
+two errors on a logarithmic y-axis. Exact zeros are plotted at machine epsilon.
+
+For xⁿ on [0,1], the L² error tends to zero, but the sup error and the pointwise
+error at x=1 remain 1. For sin(nx)/n, all three errors tend to zero. The steps
+describe apparent convergence from decreasing errors and a negative fitted tail
+slope (or errors that are zero throughout). These finite observations do not
+prove convergence, and the sup grid can miss narrow peaks.
 
 ## Gallery
 
@@ -52,7 +77,7 @@ python examples/make_figures.py
 
 ## Roadmap
 
-- Functional: convergence modes and convergence estimates for Galerkin operator approximations
+- Functional: convergence estimates for Galerkin operator approximations
 - PDE: heat / wave / Laplace by separation of variables and finite differences
 - Differential geometry: curvature, Frenet frame, geodesics
 - Numerical methods with the same calling style
