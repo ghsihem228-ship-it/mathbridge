@@ -1,4 +1,4 @@
-[![Tests](https://github.com/ghsihem228-ship-it/mathbridge/actions/workflows/tests.yml/badge.svg)](https://github.com/ghsihem228-ship-it/mathbridge/actions/workflows/tests.yml)
+[![PyPI](https://img.shields.io/pypi/v/sihem-mathbridge)](https://pypi.org/project/sihem-mathbridge/) [![Python](https://img.shields.io/pypi/pyversions/sihem-mathbridge)](https://pypi.org/project/sihem-mathbridge/) [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Tests](https://github.com/ghsihem228-ship-it/mathbridge/actions/workflows/tests.yml/badge.svg)](https://github.com/ghsihem228-ship-it/mathbridge/actions/workflows/tests.yml)
 
 # mathbridge
 
