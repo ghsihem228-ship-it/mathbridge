@@ -1,3 +1,5 @@
+[![Tests](https://github.com/ghsihem228-ship-it/mathbridge/actions/workflows/tests.yml/badge.svg)](https://github.com/ghsihem228-ship-it/mathbridge/actions/workflows/tests.yml)
+
 # mathbridge
 
 A unified layer over NumPy / SciPy for the topics that Python leaves scattered:
