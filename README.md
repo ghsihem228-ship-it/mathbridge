@@ -24,12 +24,12 @@ fourier.gibbs_overshoot(sq, np.pi, n_terms=50, explain=True)
 
 | Module | Functions |
 |---|---|
-| `mathbridge.functional` | `inner_product`, `norm`, `distance`, `gram_schmidt`, `project` |
+| `mathbridge.functional` | `inner_product`, `norm`, `distance`, `gram_schmidt`, `project`, `galerkin_matrix`, `integral_operator`, `spectrum`, `operator_norm` |
 | `mathbridge.fourier` | `coefficients`, `partial_sum`, `parseval`, `gibbs_overshoot` |
 
 ## Roadmap
 
-- Functional: operator spectrum (matrix approximation), convergence modes
+- Functional: convergence modes and convergence estimates for Galerkin operator approximations
 - PDE: heat / wave / Laplace by separation of variables and finite differences
 - Differential geometry: curvature, Frenet frame, geodesics
 - Numerical methods with the same calling style
