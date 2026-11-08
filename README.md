@@ -27,6 +27,29 @@ fourier.gibbs_overshoot(sq, np.pi, n_terms=50, explain=True)
 | `mathbridge.functional` | `inner_product`, `norm`, `distance`, `gram_schmidt`, `project`, `galerkin_matrix`, `integral_operator`, `spectrum`, `operator_norm` |
 | `mathbridge.fourier` | `coefficients`, `partial_sum`, `parseval`, `gibbs_overshoot` |
 
+## Gallery
+
+Square wave Fourier partial sums with N=5 and N=50 show the Gibbs phenomenon.
+
+![Square wave and Fourier partial sums for N=5 and N=50](docs/img/gibbs.png)
+
+Projecting x² onto a Legendre-like basis built with `gram_schmidt`: the first two
+functions give the constant 1/3, while all three reproduce x² exactly.
+
+![L2 projections of x squared onto two and three Legendre basis functions](docs/img/projection.png)
+
+Eigenvalues of the integral operator with kernel min(x,y) on [0,1], computed
+using `integral_operator`, `galerkin_matrix`, and `spectrum`, compared with the
+exact values 1/(((n-1/2)π)²).
+
+![Computed and exact eigenvalues of the min(x,y) integral operator](docs/img/spectrum.png)
+
+Regenerate the PNGs after installing the package:
+
+```bash
+python examples/make_figures.py
+```
+
 ## Roadmap
 
 - Functional: convergence modes and convergence estimates for Galerkin operator approximations
