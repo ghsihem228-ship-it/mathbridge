@@ -1,15 +1,34 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
 
 [project]
 name = "mathbridge"
 version = "0.1.0"
-description = "A unified layer over NumPy/SciPy/SymPy for functional analysis and Fourier series, with step-by-step explanations and ready-made plots."
+description = "Functional analysis, Fourier series, PDEs, and curve geometry with step-by-step explanations and plots."
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["mathematics", "functional-analysis", "fourier-series", "pde", "differential-geometry", "numerical-methods"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
 dependencies = ["numpy>=1.24", "scipy>=1.10", "matplotlib>=3.7", "sympy>=1.12"]
+
+[project.urls]
+Homepage = "https://github.com/ghsihem228-ship-it/mathbridge"
+Issues = "https://github.com/ghsihem228-ship-it/mathbridge/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=7"]
