@@ -3,7 +3,7 @@ requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mathbridge"
+name = "sihem-mathbridge"
 version = "0.1.0"
 description = "Functional analysis, Fourier series, PDEs, and curve geometry with step-by-step explanations and plots."
 readme = "README.md"

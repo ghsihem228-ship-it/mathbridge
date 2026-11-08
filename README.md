@@ -154,7 +154,9 @@ python examples/make_figures.py
 
 ## Install and test
 
+The PyPI distribution is `sihem-mathbridge`; the Python package and imports remain `mathbridge`.
+
 ```bash
-pip install -e ".[dev]"
+pip install sihem-mathbridge
 pytest
 ```
